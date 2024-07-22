@@ -8,7 +8,7 @@ public class FileHandler implements Writer {
 
     @Override
     public void serializeFamily(Serializable serializable) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("family_members.txt"))) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("family_members.ser"))) {
             out.writeObject(serializable);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -17,7 +17,7 @@ public class FileHandler implements Writer {
 
     @Override
     public Object deserializeFamily() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("family_members.txt"))) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("family_members.ser"))) {
             Object object = in.readObject();
             return object;
         } catch (Exception ex) {

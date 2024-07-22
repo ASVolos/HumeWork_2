@@ -3,9 +3,11 @@ package FamilyTree;
 import FamilyTree.FamilyTree.FamilyTree;
 import FamilyTree.Human.Gender;
 import FamilyTree.Human.Human;
+import FamilyTree.Writer.FileHandler;
+
+import java.time.LocalDate;
 
 import java.io.*;
-import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -30,13 +32,18 @@ public class Main {
         person1.getChildren().add(person4);
         person2.getChildren().add(person4);
 
-// Поиск по имени или фамилии:
-        //FamilyTree.seachPersonByName(sc, familyTree);
+        saveTree(familyTree);
 
-        // Сериализация
-        familyTree.serializeFamilyMembers();
-        // Десериализация
-        familyTree.deserializeFamilyMembers();
-        System.out.println(familyTree);
+        System.out.println(readTree());
+    }
+
+    private static void saveTree(FamilyTree familyTree) {
+        FileHandler fileHandler = new FileHandler();
+        fileHandler.serializeFamily(familyTree);
+    }
+
+    private static FamilyTree readTree() {
+        FileHandler fileHandler = new FileHandler();
+        return (FamilyTree) fileHandler.deserializeFamily();
     }
 }
